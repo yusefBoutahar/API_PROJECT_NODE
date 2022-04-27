@@ -27,38 +27,3 @@ app.use('/api/games', gamesRouter);
 app.use('/api/forums', forumsRouter);
 
 app.listen(4200);
-
-/*
-const mongoose = require('mongoose');
-const messageSchema = new mongoose.Schema(
-    {
-        body:{
-            type:String,
-            require:true
-        },
-        user:{
-            type:mongoose.Types.ObjectId,
-            require:true
-        },
-        forum:{
-            type:mongoose.Types.ObjectId,
-            require:true
-        }
-
-    },
-    {
-        timestamps:true,
-        versionKey:false
-    }
-
-)
-
-const messages = new mongoose.model('messages',messageSchema)
-
-messages.create(
-    {
-        body:"hola que tal",
-        user:"6269267c9932754f6402c7d9",
-        forum:"626938e1c0f23b5e1acdeadb"
-    }
-)*/
