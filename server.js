@@ -1,6 +1,7 @@
 //const config = require('./config.js');
 const express = require('express');
-require('mongoose').connect(DB_URI,
+require('dotenv').config();
+require('mongoose').connect(process.env.DB_URI,
     {
         useNewUrlParser:true, 
         useUnifiedTopology:true,
@@ -26,6 +27,6 @@ app.use('/api/messages', messagesRouter);
 app.use('/api/games', gamesRouter);
 app.use('/api/forums', forumsRouter);
 
-app.listen(PORT, HOST, function () {
-    console.log(`App listening on http://${HOST}:${PORT}`);
+app.listen(process.env.PORT, process.env.HOST, function () {
+    console.log(`App listening on http://${process.env.HOST}:${process.env.PORT}`);
   });
