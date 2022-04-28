@@ -1,6 +1,6 @@
 //const config = require('./config.js');
 const express = require('express');
-require('mongoose').connect(config.DB_URI,
+require('mongoose').connect(DB_URI,
     {
         useNewUrlParser:true, 
         useUnifiedTopology:true,
@@ -26,6 +26,6 @@ app.use('/api/messages', messagesRouter);
 app.use('/api/games', gamesRouter);
 app.use('/api/forums', forumsRouter);
 
-app.listen(config.PORT, config.HOST, function () {
-    console.log(`App listening on http://${config.HOST}:${config.PORT}`);
+app.listen(PORT, HOST, function () {
+    console.log(`App listening on http://${HOST}:${PORT}`);
   });
