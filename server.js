@@ -1,6 +1,5 @@
-//const config = require('./config.js');
 const express = require('express');
-require('dotenv').config();
+require('dotenv').config();// para las variables de entorno
 require('mongoose').connect(process.env.DB_URI,
     {
         useNewUrlParser:true, 
