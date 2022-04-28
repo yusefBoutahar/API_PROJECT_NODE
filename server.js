@@ -1,4 +1,4 @@
-const config = require('./config.js');
+//const config = require('./config.js');
 const express = require('express');
 require('mongoose').connect(config.DB_URI,
     {
