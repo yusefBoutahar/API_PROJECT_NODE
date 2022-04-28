@@ -1,6 +1,6 @@
 const express = require('express');
-require('dotenv').config();// para las variables de entorno
-require('mongoose').connect(process.env.DB_URI,
+const config = require('./config');
+require('mongoose').connect(config.database.db_uri,
     {
         useNewUrlParser:true, 
         useUnifiedTopology:true,
@@ -26,6 +26,6 @@ app.use('/messages', messagesRouter);
 app.use('/games', gamesRouter);
 app.use('/forums', forumsRouter);
 
-app.listen(process.env.PORT, process.env.HOST, function () {
-    console.log(`App listening on http://${process.env.HOST}:${process.env.PORT}`);
+app.listen(config.port, config.host, function () {
+    console.log(`App listening on http://${config.host}:${config.port}`);
   });
