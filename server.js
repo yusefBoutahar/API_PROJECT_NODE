@@ -8,6 +8,8 @@ require('mongoose').connect(config.DB_URI,
     },(err) =>{
         if(err){
             console.log("ERROR EN LA CONEXION");
+        }else {
+            console.log("Conectado a la BD");
         }
     })
 
