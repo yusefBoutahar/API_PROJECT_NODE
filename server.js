@@ -21,10 +21,10 @@ const gamesRouter = require('./api/games');
 const forumsRouter = require('./api/forums');
 
 app.use(express.json());
-app.use('/api/users', usersRouter);
-app.use('/api/messages', messagesRouter);
-app.use('/api/games', gamesRouter);
-app.use('/api/forums', forumsRouter);
+app.use('/users', usersRouter);
+app.use('/messages', messagesRouter);
+app.use('/games', gamesRouter);
+app.use('/forums', forumsRouter);
 
 app.listen(process.env.PORT, process.env.HOST, function () {
     console.log(`App listening on http://${process.env.HOST}:${process.env.PORT}`);
