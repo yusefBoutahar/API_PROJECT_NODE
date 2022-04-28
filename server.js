@@ -1,6 +1,6 @@
-const DB_URI = require('./private/globals');
+const config = require('./config.js');
 const express = require('express');
-require('mongoose').connect(DB_URI,
+require('mongoose').connect(config.DB_URI,
     {
         useNewUrlParser:true, 
         useUnifiedTopology:true,
@@ -8,8 +8,6 @@ require('mongoose').connect(DB_URI,
     },(err) =>{
         if(err){
             console.log("ERROR EN LA CONEXION");
-        }else{
-            console.log("CONEXION CORRECTA");
         }
     })
 
@@ -26,4 +24,6 @@ app.use('/api/messages', messagesRouter);
 app.use('/api/games', gamesRouter);
 app.use('/api/forums', forumsRouter);
 
-app.listen(4200);
+app.listen(config.PORT, config.HOST, function () {
+    console.log(`App listening on http://${config.HOST}:${config.PORT}`);
+  });
