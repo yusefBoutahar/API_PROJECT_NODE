@@ -35,8 +35,8 @@ async function updateGame(req, res){
 
     const game = await games.findById(id);
     const imageURL = await imageRepository.uploadImage(game.title,req.file.buffer,req.file.mimetype);
-    console.log(imageURL)
-    game.image = imageURL;
+    //console.log(imageURL)
+    //game.image = imageURL;
 
     games.findByIdAndUpdate(
         { _id: id },

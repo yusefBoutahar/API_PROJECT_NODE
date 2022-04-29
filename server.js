@@ -9,7 +9,7 @@ require('mongoose').connect(config.database.db_uri,
         if(err){
             console.log("ERROR EN LA CONEXION");
         }else {
-            console.log("Conectado a la BD");
+            console.log("CONECTADO A LA DB");
         }
     })
 
@@ -27,5 +27,5 @@ app.use('/games', gamesRouter);
 app.use('/forums', forumsRouter);
 
 app.listen(config.port, config.host, function () {
-    console.log(`App listening on http://${config.host}:${config.port}`);
+    console.log(`(if local) App listening on http://${config.host}:${config.port}`);
   });
