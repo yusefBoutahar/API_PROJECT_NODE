@@ -29,12 +29,18 @@ async function deleteGame(req, res){
 
 async function updateGame(req, res){
     const id  = req.params.id;
+    let title = "";
     if (!thisGameExists(id)) {
         return res.status(400).send({ error: 400, msg: 'Este juego no existe' })
     };
+    if(req.body.title && typeof req.body.title != 'string'){
+        title  = req.body.title;
+    }else{
+        const game = await games.findById(id);
+        title  = game.title;
+    }
 
-    const game = await games.findById(id);
-    const imageURL = await imageRepository.uploadImage(game.title,req.file.buffer,req.file.mimetype);
+    const imageURL = await imageRepository.uploadImage(title,req.file.buffer,req.file.mimetype);
 
     games.findByIdAndUpdate(
         { _id: id },
