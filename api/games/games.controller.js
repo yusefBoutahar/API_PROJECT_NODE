@@ -35,8 +35,6 @@ async function updateGame(req, res){
 
     const game = await games.findById(id);
     const imageURL = await imageRepository.uploadImage(game.title,req.file.buffer,req.file.mimetype);
-    //console.log(imageURL)
-    //game.image = imageURL;
 
     games.findByIdAndUpdate(
         { _id: id },
@@ -74,17 +72,18 @@ async function addGame(req, res){
     if (!req.body.minimunAge && typeof req.body.minimunAge != 'number') {
         return res.status(400).send({ error: 400, msg: 'edad minima incorrecto o inexistente' })
     };
-    if (!req.body.image && typeof req.body.image != 'string') {
+    if (!req.file && typeof req.file != 'file') {
         return res.status(400).send({ error: 400, msg: 'url imagen incorrecto o inexistente' })
     };
 
+    const imageURL = await imageRepository.uploadImage(req.body.title,req.file.buffer,req.file.mimetype);
     const newGame = {
         title: req.body.title,
         studio: req.body.studio,
         platform: req.body.platform,
         releaseDate: req.body.releaseDate,
         minimunAge: req.body.minimunAge,
-        image: req.body.image
+        image: imageURL
     }
 
     return games.create(newGame)
