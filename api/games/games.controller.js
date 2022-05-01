@@ -1,6 +1,6 @@
 const res = require('express/lib/response');
 const games = require('./games.model')
-const ImageRepository = require('../s3_aws/imageRepository');
+const ImageRepository = require('../middleware/imageRepository');
 const imageRepository = new ImageRepository();
 
 module.exports = {
@@ -33,11 +33,10 @@ async function updateGame(req, res){
     if (!thisGameExists(id)) {
         return res.status(400).send({ error: 400, msg: 'Este juego no existe' })
     };
-    if(req.body.title && typeof req.body.title != 'string'){
-        title  = req.body.title;
+    if(!req.body.title && typeof req.body.title != 'string'){
+        title = (await games.findById(id)).title;
     }else{
-        const game = await games.findById(id);
-        title  = game.title;
+        title  = req.body.title;
     }
 
     const imageURL = await imageRepository.uploadImage(title,req.file.buffer,req.file.mimetype);

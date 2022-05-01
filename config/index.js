@@ -4,6 +4,7 @@ require('dotenv').config();// para las variables de entorno
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = {
+    secretToken: process.env.TOKEN_LOGIN_SECRET_01,
     port: process.env.PORT,
     host: process.env.HOST,
     database:{

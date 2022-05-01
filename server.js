@@ -19,12 +19,14 @@ const usersRouter = require('./api/users');
 const messagesRouter = require('./api/messages');
 const gamesRouter = require('./api/games');
 const forumsRouter = require('./api/forums');
+const loginRouter = require('./api/login');
 
 app.use(express.json());
 app.use('/users', usersRouter);
 app.use('/messages', messagesRouter);
 app.use('/games', gamesRouter);
 app.use('/forums', forumsRouter);
+app.use('/login', loginRouter);
 
 app.listen(config.port, config.host, function () {
     console.log(`(if local) App listening on http://${config.host}:${config.port}`);

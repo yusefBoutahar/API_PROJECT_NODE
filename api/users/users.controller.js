@@ -1,5 +1,7 @@
 const users = require('./users.model')
-
+const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken")
+const config = require('../../config');
 
 module.exports = {
     getAllUsers : getAllUsers,
@@ -62,19 +64,28 @@ async function addUser(req, res){
     };
 
 
-    const newUser = {
-        username: req.body.username,
-        password: req.body.password,
-        email: req.body.email
-    }
 
-    return users.create(newUser)
-        .then(response => {
-            return res.json(response)
-        })
-        .catch(err => {
-            return res.status(400).send({ error: 400, msg: 'este email ya existe' })
-        })
+
+
+    bcrypt.hash(req.body.password, 2 , (err, passwordHash) =>{
+        if(err){
+            console.log(err)
+        }else{
+            const newUser = {
+                username: req.body.username,
+                password: passwordHash,
+                email: req.body.email
+            }
+        
+            return users.create(newUser)
+                .then(response => {
+                    return res.json(response)
+                })
+                .catch(err => {
+                    return res.status(400).send({ error: 400, msg: 'este username ya existe' })
+                })
+        }
+    })
 }
 
 function getAllUsers(req, res){
